@@ -7,6 +7,7 @@ public class Nodo {
 	private char letter;
 
 	public Nodo(char letter, Nodo next, Nodo prev) {
+		this.letter = letter;
 		nextNodo = next;
 		prevNodo = prev;
 	}

@@ -96,11 +96,11 @@ public class TuringMachine {
 	
 	public void deleteFirstNodo() {
 		if(firstNodo!=null) {
-			if(firstNodo==lastNodo) {
+			if(size==1) {
 				firstNodo=lastNodo=null;
 			}else {
 				firstNodo = firstNodo.getNextNodo();
-				lastNodo.setPrevNodo(null);
+				firstNodo.setPrevNodo(null);
 			}
 			size--;
 		}
@@ -110,6 +110,7 @@ public class TuringMachine {
 		if(firstNodo!=null){
 			if(size==1) {
 				firstNodo=lastNodo=null;
+				size--;
 			}else {
 				if(size==2) {
 					deleteFirstNodo();
@@ -135,16 +136,16 @@ public class TuringMachine {
 						newN.setNextNodo(aux.getNextNodo());
 						aux.getNextNodo().setPrevNodo(newN);
 					}
+					
+					size--;
 				}
 			}
 		}
-		
-		size--;
 	}
 	
 	public void deleteLastNodo() {
 		if(firstNodo!=null) {
-			if(firstNodo==lastNodo) {
+			if(size==1) {
 				firstNodo=lastNodo=null;
 			}else {
 				lastNodo = lastNodo.getPrevNodo();
@@ -211,6 +212,10 @@ public class TuringMachine {
 		return lastNodo;
 	}
 	
+	public int getSize() {
+		return size;
+	}
+	
 	public String showList() {
 		String message = "";
 		if(firstNodo==null) {
@@ -241,5 +246,9 @@ public class TuringMachine {
 		}
 		
 		return message;
+	}
+	
+	public void resetTuringMachine() {
+		firstNodo=lastNodo=null;
 	}
 }

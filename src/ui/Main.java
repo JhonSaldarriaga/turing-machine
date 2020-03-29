@@ -7,7 +7,8 @@ import model.*;
 public class Main {
 
 	private TuringMachine tm;
-	private final String DATABASE_NAME = "data/datos.txt";
+	private final String DATABASE_NAME = "data/in_turing.txt";
+	private final String REPORT = "data/report.txt";
 	
 	public static void main (String [] args) throws IOException {
 		Main main = new Main();
@@ -19,7 +20,9 @@ public class Main {
 	}
 	
 	public void program() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(REPORT));
 		File file = new File(DATABASE_NAME);
+		char[] data;
 		if(file.exists()) {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -30,22 +33,23 @@ public class Main {
 				if(line==null){
 					empty = true;
 				}else {
-					resolve(line);
+					data = line.toCharArray();
+					resolve(line, bw, data);
 					resetTuringMachine();
 				}
 			}
 			
 			br.close();
+			bw.close();
 		}
 	}
 	
-	public void resolve(String line) {
-		char[] data = line.toCharArray();
+	public void resolve(String line, BufferedWriter bw, char[] data) throws IOException {	
 		int position = 0;
 		int size = data.length;
 		while(position<size) {
 			if(data[position+1] == '0') {
-				System.out.println(tm.readNodo(data[position]));
+				bw.write(tm.readNodo(data[position]) + "\n");
 				position+=2;
 			}else {
 				if(data[position+1] == '1'){
@@ -58,10 +62,12 @@ public class Main {
 					}
 				}
 			}
+			
+			bw.flush();
 		}
 	}
 	
 	public void resetTuringMachine() {
-		tm = new TuringMachine();
+		tm.resetTuringMachine();
 	}
 }

@@ -161,15 +161,19 @@ public class TuringMachineTest {
 	public void deleteNodoTest() {
 		setup1();
 
+		System.out.println(tm.showList());
 		tm.deleteNodo('2');
 		assertEquals('l', tm.getLast().getLetter());
 
+		System.out.println(tm.showList());
 		tm.deleteNodo('0');
 		assertEquals('n', tm.getFirst().getLetter());
 
+		System.out.println(tm.showList());
 		tm.deleteNodo('1');
 		assertEquals('n', tm.getFirst().getLetter());
 
+		System.out.println(tm.showList());
 		tm.deleteNodo('1');
 		assertEquals('l', tm.getFirst().getLetter());
 
@@ -204,6 +208,10 @@ public class TuringMachineTest {
 		
 		letter = tm.readNodo('2');
 		assertEquals('#', letter);
-		
+	}
+	
+	@Test
+	public void showList() {
+		setup3();
 	}
 }

@@ -96,7 +96,7 @@ public class TuringMachine {
 	
 	public void deleteFirstNodo() {
 		if(firstNodo!=null) {
-			if(size==1) {
+			if(firstNodo==lastNodo) {
 				firstNodo=lastNodo=null;
 			}else {
 				firstNodo = firstNodo.getNextNodo();
@@ -145,7 +145,7 @@ public class TuringMachine {
 	
 	public void deleteLastNodo() {
 		if(firstNodo!=null) {
-			if(size==1) {
+			if(firstNodo==lastNodo) {
 				firstNodo=lastNodo=null;
 			}else {
 				lastNodo = lastNodo.getPrevNodo();
@@ -212,10 +212,6 @@ public class TuringMachine {
 		return lastNodo;
 	}
 	
-	public int getSize() {
-		return size;
-	}
-	
 	public String showList() {
 		String message = "";
 		if(firstNodo==null) {
@@ -246,9 +242,5 @@ public class TuringMachine {
 		}
 		
 		return message;
-	}
-	
-	public void resetTuringMachine() {
-		firstNodo=lastNodo=null;
 	}
 }

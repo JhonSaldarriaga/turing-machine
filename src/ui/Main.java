@@ -7,7 +7,7 @@ import model.*;
 public class Main {
 
 	private TuringMachine tm;
-	private final String DATABASE_NAME = "data/in_turing.txt";
+	private final String DATABASE_NAME = "data/example.txt";
 	private final String REPORT = "data/report.txt";
 	
 	public static void main (String [] args) throws IOException {
@@ -20,9 +20,9 @@ public class Main {
 	}
 	
 	public void program() throws IOException {
+		long init = System.currentTimeMillis();
 		BufferedWriter bw = new BufferedWriter(new FileWriter(REPORT));
 		File file = new File(DATABASE_NAME);
-		char[] data;
 		if(file.exists()) {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -33,8 +33,7 @@ public class Main {
 				if(line==null){
 					empty = true;
 				}else {
-					data = line.toCharArray();
-					resolve(line, bw, data);
+					resolve(line, bw);
 					resetTuringMachine();
 				}
 			}
@@ -42,9 +41,12 @@ public class Main {
 			br.close();
 			bw.close();
 		}
+		long finish = System.currentTimeMillis();
+		System.out.println(finish-init);
 	}
 	
-	public void resolve(String line, BufferedWriter bw, char[] data) throws IOException {	
+	public void resolve(String line, BufferedWriter bw) throws IOException {
+		char[] data = line.toCharArray();
 		int position = 0;
 		int size = data.length;
 		while(position<size) {
@@ -62,12 +64,10 @@ public class Main {
 					}
 				}
 			}
-			
-			bw.flush();
 		}
 	}
 	
 	public void resetTuringMachine() {
-		tm.resetTuringMachine();
+		tm = new TuringMachine();
 	}
 }

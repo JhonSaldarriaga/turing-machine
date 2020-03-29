@@ -209,9 +209,4 @@ public class TuringMachineTest {
 		letter = tm.readNodo('2');
 		assertEquals('#', letter);
 	}
-	
-	@Test
-	public void showList() {
-		setup3();
-	}
 }
